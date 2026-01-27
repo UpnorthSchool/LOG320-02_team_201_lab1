@@ -8,13 +8,14 @@ class Board
 {
     //[row][column]
     private Mark[][] board;
+    private int boardSize = 3;
 
     // Ne pas changer la signature de cette méthode
     public Board() {
-        board = new Mark[3][3];
-        for(int r = 0; r < 3; r++){
-            for(int c = 0; c < 3; c++){
-                board[r][c] = Mark.EMPTY;
+        board = new Mark[boardSize][boardSize];
+        for(int xCol = 0; xCol < boardSize; xCol++){
+            for(int yLig = 0; yLig < boardSize; yLig++){
+                board[xCol][yLig] = Mark.EMPTY;
             }
         }
     }
@@ -27,7 +28,7 @@ class Board
     // position spécifiée dans Move
     // Ne pas changer la signature de cette méthode
     public void play(Move m, Mark mark){
-        board[m.getRow()][m.getCol()] = mark;
+        board[m.getCol()][m.getRow()] = mark;
     }
 
 
@@ -36,22 +37,51 @@ class Board
     //           0   pour un match nul
     // Ne pas changer la signature de cette méthode
     public int evaluate(Mark mark){
-        return 100;
+        
+        // Rows
+        if (
+            (board[0][0] == mark && board[0][1] == mark && board[0][2] == mark) ||
+            (board[1][0] == mark && board[1][1] == mark && board[1][2] == mark) ||
+            (board[2][0] == mark && board[2][1] == mark && board[2][2] == mark)
+        ) {
+            return 100;
+        }
+
+        // Columns
+        if (
+            (board[0][0] == mark && board[1][0] == mark && board[2][0] == mark) ||
+            (board[0][1] == mark && board[1][1] == mark && board[2][1] == mark) ||
+            (board[0][2] == mark && board[1][2] == mark && board[2][2] == mark)
+        ) {
+            return 100;
+        }
+
+        // Diagonals
+        if (
+            (board[0][0] == mark && board[1][1] == mark && board[2][2] == mark) ||
+            (board[0][2] == mark && board[1][1] == mark && board[2][0] == mark)
+        ) {
+            return 100;
+        }
+
+        // No victory
+        return 0;
     }
 
     public void display(){
-        for(int r = 0; r < 3; r++){
-            for(int c = 0; c < 3; c++){
-                if(board[r][c] == Mark.EMPTY){
-                    System.out.print(r+" "+c);
-                }else{
-                    System.out.print(" "+board[r][c].toString()+" ");
-                }
-                if(c != 2){
-                    System.out.print("|");
-                }
+        StringBuilder boardShowString = new StringBuilder();
+        for(int yLig = boardSize - 1 ; yLig >= 0; yLig--){
+            for(int xCol = 0; xCol < boardSize ; xCol++){
+                boardShowString.append(board[xCol][yLig] + "  ");
             }
-            System.out.println();
+            boardShowString.append("\n");
         }
+        System.out.println(boardShowString.toString());
+    }
+
+
+    public boolean getVictoire()
+    {
+        return true;
     }
 }

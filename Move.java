@@ -10,9 +10,9 @@ class Move
         col = -1;
     }
 
-    public Move(int r, int c){
-        row = r;
-        col = c;
+    public Move(int xCol, int yLig){
+        row = yLig;
+        col = xCol;
     }
 
     public int getRow(){
