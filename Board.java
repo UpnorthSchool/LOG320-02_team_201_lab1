@@ -23,8 +23,7 @@ class Board
     // position spécifiée dans Move
     // Ne pas changer la signature de cette méthode
     public void play(Move m, Mark mark){
-
-
+        board[m.getRow()][m.getCol()] = mark;
     }
 
 
