@@ -19,6 +19,10 @@ class Board
         }
     }
 
+    public Mark[][] getBoard(){
+        return board;
+    }
+
     // Place la pièce 'mark' sur le plateau, à la
     // position spécifiée dans Move
     // Ne pas changer la signature de cette méthode
