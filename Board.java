@@ -6,16 +6,21 @@ import java.util.ArrayList;
 // être le cas)
 class Board
 {
+    //[row][column]
     private Mark[][] board;
 
     // Ne pas changer la signature de cette méthode
     public Board() {
-
+        board = new Mark[3][3];
+        for(int r = 0; r < 3; r++){
+            for(int c = 0; c < 3; c++){
+                board[r][c] = Mark.EMPTY;
+            }
+        }
     }
 
     // Place la pièce 'mark' sur le plateau, à la
     // position spécifiée dans Move
-    //
     // Ne pas changer la signature de cette méthode
     public void play(Move m, Mark mark){
 
