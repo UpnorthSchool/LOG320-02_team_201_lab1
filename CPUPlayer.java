@@ -31,6 +31,16 @@ class CPUPlayer
     {
         numExploredNodes = 0;
 
+        //TODO
+        ArrayList<Move> nextMoves = new ArrayList<>();
+        for(int r = 0; r < 3; r++){
+            for(int c = 0; c < 3; c++){
+                if (board.getBoard()[r][c] == Mark.EMPTY){
+                    nextMoves.add(new Move(r, c));
+                }
+            }
+        }
+        return nextMoves;
     }
 
     // Retourne la liste des coups possibles.  Cette liste contient
@@ -39,6 +49,8 @@ class CPUPlayer
     public ArrayList<Move> getNextMoveAB(Board board){
         numExploredNodes = 0;
 
+        //todo
+        return new ArrayList<>();
     }
 
 }
