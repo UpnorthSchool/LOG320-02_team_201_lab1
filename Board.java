@@ -34,4 +34,20 @@ class Board
     public int evaluate(Mark mark){
         return 100;
     }
+
+    public void display(){
+        for(int r = 0; r < 3; r++){
+            for(int c = 0; c < 3; c++){
+                if(board[r][c] == Mark.EMPTY){
+                    System.out.print(r+" "+c);
+                }else{
+                    System.out.print(" "+board[r][c].toString()+" ");
+                }
+                if(c != 2){
+                    System.out.print("|");
+                }
+            }
+            System.out.println();
+        }
+    }
 }
