@@ -36,7 +36,57 @@ class Board
     //           0   pour un match nul
     // Ne pas changer la signature de cette méthode
     public int evaluate(Mark mark){
-        return 100;
+        Mark player;
+        Mark opponent;
+        boolean won;
+        boolean lost;
+
+        if(mark == Mark.X){
+            player = Mark.X;
+            opponent = Mark.O;
+        } else if (mark == Mark.O) {
+            player = Mark.O;
+            opponent = Mark.X;
+        } else{
+            return -1;
+        }
+
+        won = hasWon(player);
+        lost = hasWon(opponent);
+        if(won && lost){
+            return 0;
+        } else if(won){
+            return 100;
+        } else if(lost){
+            return -100;
+        } else {
+            return 0;
+        }
+    }
+
+    public boolean hasWon(Mark mark){
+        //rows
+        for(int r = 0; r < 3; r++){
+            if(board[r][0]==mark && board[r][1]==mark && board[r][2]==mark){
+                return true;
+            }
+        }
+        //columns
+        for(int c = 0; c < 3; c++){
+            if(board[0][c]==mark && board[1][c]==mark && board[2][c]==mark){
+                return true;
+            }
+        }
+        //diagonals
+        if(board[0][0]==mark && board[1][1]==mark && board[2][2]==mark){
+                return true;
+        }
+        if(board[2][0]==mark && board[1][1]==mark && board[0][2]==mark){
+                return true;
+        }
+
+        //or else
+        return false;
     }
 
     public void display(){
