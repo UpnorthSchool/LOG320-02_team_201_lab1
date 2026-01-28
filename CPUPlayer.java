@@ -12,11 +12,12 @@ class CPUPlayer
     // Normalement, la variable devrait être incrémentée
     // au début de votre MinMax ou Alpha Beta.
     private int numExploredNodes;
+    private Mark cpuMARK;
 
     // Le constructeur reçoit en paramètre le
     // joueur MAX (X ou O)
     public CPUPlayer(Mark cpu){
-
+        setCpuMark(cpu);
     }
 
     // Ne pas changer cette méthode
@@ -69,4 +70,20 @@ class CPUPlayer
         return moveAvailableNow;
     } 
 
+
+
+
+
+    //////getter setter
+    /// 
+    /// 
+    public void setCpuMark(Mark cpu)
+    {
+        cpuMARK = cpu;
+    }
+
+    public Mark getCpuMark()
+    {
+        return cpuMARK;
+    }
 }

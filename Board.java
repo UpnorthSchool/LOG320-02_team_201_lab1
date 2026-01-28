@@ -148,4 +148,30 @@ class Board
         return boardSize;
     }
 
+
+
+    public boolean hasWon(int scoreKeeper)
+    {
+        if(scoreKeeper != Integer.MIN_VALUE)
+            {
+            if(scoreKeeper == 100)
+            {
+                System.out.println("!! Victoire du Joueur !! ");
+                System.out.println("PARTIE TERMINER");
+                return true;
+            }else if (scoreKeeper == -100)
+            {
+                System.out.println("!! VICTOIRE de L'AI !!");
+                System.out.println("PARTIE TERMINER");
+                return true;
+
+            }else if (scoreKeeper == 0)
+            {
+                System.out.println("!! PARTIE NULL !!");
+                return true;
+            }
+            }
+        return false;
+    }
+
 }

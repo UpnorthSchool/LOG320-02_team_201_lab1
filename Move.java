@@ -30,4 +30,12 @@ class Move
     public void setCol(int c){
         col = c;
     }
+
+
+
+    @Override
+    public String toString()
+    {
+        return (getCol() + "" + getRow());
+    }
 }
