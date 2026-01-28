@@ -1,4 +1,4 @@
-package Decoder;
+package Game.Decoder;
 public class stringToInt {
 
     int moveDecoded         = 0;

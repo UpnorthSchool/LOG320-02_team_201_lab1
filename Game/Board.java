@@ -1,10 +1,11 @@
+package Game;
 import java.util.ArrayList;
 
 // IMPORTANT: Il ne faut pas changer la signature des méthodes
 // de cette classe, ni le nom de la classe.
 // Vous pouvez par contre ajouter d'autres méthodes (ça devrait 
 // être le cas)
-class Board
+public class Board
 {
     //[row][column]
     private Mark[][] board;

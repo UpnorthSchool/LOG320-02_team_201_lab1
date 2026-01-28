@@ -1,5 +1,6 @@
+package Game;
 
-enum Mark{
+public enum Mark{
         X,
         O,
         EMPTY

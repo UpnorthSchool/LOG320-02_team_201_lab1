@@ -1,10 +1,11 @@
+package Game;
 import java.util.ArrayList;
 
 // IMPORTANT: Il ne faut pas changer la signature des méthodes
 // de cette classe, ni le nom de la classe.
 // Vous pouvez par contre ajouter d'autres méthodes (ça devrait 
 // être le cas)
-class CPUPlayer
+public class CPUPlayer
 {
 
     // Contient le nombre de noeuds visités (le nombre
@@ -13,12 +14,14 @@ class CPUPlayer
     // au début de votre MinMax ou Alpha Beta.
     private int numExploredNodes;
     private Mark cpuMARK;
+    private Mark opponentMARK;
     private ArrayList<Move> movePossibleUncheck = new ArrayList<>();
 
     // Le constructeur reçoit en paramètre le
     // joueur MAX (X ou O)
     public CPUPlayer(Mark cpu){
         setCpuMark(cpu);
+        setCpuMark((cpu == Mark.X) ? Mark.O : Mark.X);
     }
 
     // Ne pas changer cette méthode
@@ -83,5 +86,14 @@ class CPUPlayer
     public Mark getCpuMark()
     {
         return cpuMARK;
+    }
+     public void setOpponentMark(Mark opponent)
+    {
+        opponentMARK = opponent;
+    }
+
+    public Mark getOpponentMark()
+    {
+        return opponentMARK;
     }
 }

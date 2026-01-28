@@ -1,6 +1,8 @@
+package Game;
 import java.util.ArrayList;
 import java.util.Scanner;
-import Decoder.stringToInt;
+
+import Game.Decoder.stringToInt;
 
 public class Test {
    public static void main(String []args) {
