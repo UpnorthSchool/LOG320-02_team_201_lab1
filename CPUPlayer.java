@@ -31,7 +31,7 @@ class CPUPlayer
     {
         numExploredNodes = 0;
 
-        //TODO
+        //TODO modifier ceici puisque ajout de fonctionpour cheker case vide a ete fait
         ArrayList<Move> nextMoves = new ArrayList<>();
         for(int r = 0; r < 3; r++){
             for(int c = 0; c < 3; c++){
@@ -52,5 +52,21 @@ class CPUPlayer
         //todo
         return new ArrayList<>();
     }
+
+    public ArrayList<Move> getAvailableCase(Board board)
+    {
+        ArrayList<Move> moveAvailableNow = new ArrayList<>();
+        for(int xCol = 0 ; xCol < board.getBoardSize() ; xCol++)
+        {
+            for(int yLig = 0; yLig < board.getBoardSize() ; yLig++)
+            {
+                if( board.getBoard()[xCol][yLig] == Mark.EMPTY)
+                {
+                    moveAvailableNow.add(new Move(xCol,yLig));
+                }
+            }
+        }
+        return moveAvailableNow;
+    } 
 
 }

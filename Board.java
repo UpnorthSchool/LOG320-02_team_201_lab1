@@ -31,6 +31,11 @@ class Board
         board[m.getCol()][m.getRow()] = mark;
     }
 
+    public void undoMove(Move moveUndo)
+    {
+        board[moveUndo.getCol()][moveUndo.getRow()] = Mark.EMPTY;
+    }
+
 
     // retourne  100 pour une victoire
     //          -100 pour une défaite
@@ -136,6 +141,11 @@ class Board
         
         return false;
         
+    }
+
+    public int getBoardSize()
+    {
+        return boardSize;
     }
 
 }

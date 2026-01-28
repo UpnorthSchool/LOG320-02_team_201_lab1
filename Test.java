@@ -55,7 +55,8 @@ public class Test {
           {
               board.play(newMoveHuman, Mark.X);
               board.display();
-              //TODO check que victoire ou defaite
+              
+              //check que victoire ou defaite
               scoreKeeper = board.evaluate(Mark.X);
               if(scoreKeeper != Integer.MIN_VALUE)
               {
