@@ -58,13 +58,10 @@ public class CPUPlayer
         return new ArrayList<>();
     }
 
-    public void setMovePossibleUncheck(Board board)
+
+    public ArrayList<Move> getMovePossibleUncheck(Board board)
     {
         movePossibleUncheck = board.getAvailableCase();
-    }
-
-    public ArrayList<Move> getMovePossibleUncheck()
-    {
         return movePossibleUncheck;
     }
 

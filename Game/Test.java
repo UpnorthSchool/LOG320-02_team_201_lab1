@@ -66,8 +66,8 @@ public class Test {
                 break;
               }
               //TODO testing here to see available ai move, seems to be working 
-              ArrayList<Move> aiPossibleNextMove= aiMachine.getMovePossibleUncheck();
-              aiPossibleNextMove.forEach( (movePossible) -> { System.out.println(movePossible.toString());});
+              ArrayList<Move> aiPossibleNextMove= aiMachine.getMovePossibleUncheck(board);
+              aiPossibleNextMove.forEach( (movePossible) -> { System.out.print(movePossible.toString() +" ; ");});
 
 
               
