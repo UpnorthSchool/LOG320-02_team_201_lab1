@@ -1,9 +1,9 @@
 import java.util.Scanner;
-import Decoder.stringToBit;
+import Decoder.stringToInt;
 
 public class Test {
    public static void main(String []args) {
-      stringToBit decoderEntrer = new stringToBit();
+      stringToInt decoderEntrer = new stringToInt();
       Board board = new Board();
       System.out.println("Svp entrer les cases que vous voulez jouer comme suit (ligne, colonne, exemple : A1,b2,c3)");
       Scanner myObj = new Scanner(System.in);

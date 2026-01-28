@@ -1,5 +1,5 @@
 package Decoder;
-public class stringToBit {
+public class stringToInt {
 
     int moveDecoded         = 0;
     int colonneDecode       = 0;
