@@ -37,35 +37,30 @@ class Board
     //           0   pour un match nul
     // Ne pas changer la signature de cette méthode
     public int evaluate(Mark mark){
+        Mark adversaireXO = (mark == Mark.X) ? Mark.O : Mark.X;
+
+        //verificationvictoire 
+        if(verifierVictoire(mark))
+        {
+            return 100;
+        }
+        if(verifierVictoire(adversaireXO))
+        {
+            return -100;
+        }
+
+        //verification partie null
+        if(partieNullCheck())
+        {
+            return 0;
+        }
+
+
         
-        // Rows
-        if (
-            (board[0][0] == mark && board[0][1] == mark && board[0][2] == mark) ||
-            (board[1][0] == mark && board[1][1] == mark && board[1][2] == mark) ||
-            (board[2][0] == mark && board[2][1] == mark && board[2][2] == mark)
-        ) {
-            return 100;
-        }
 
-        // Columns
-        if (
-            (board[0][0] == mark && board[1][0] == mark && board[2][0] == mark) ||
-            (board[0][1] == mark && board[1][1] == mark && board[2][1] == mark) ||
-            (board[0][2] == mark && board[1][2] == mark && board[2][2] == mark)
-        ) {
-            return 100;
-        }
-
-        // Diagonals
-        if (
-            (board[0][0] == mark && board[1][1] == mark && board[2][2] == mark) ||
-            (board[0][2] == mark && board[1][1] == mark && board[2][0] == mark)
-        ) {
-            return 100;
-        }
-
-        // No victory
-        return 0;
+       
+        return Integer.MIN_VALUE;
+        
     }
 
     public void display(){
@@ -82,6 +77,47 @@ class Board
 
     public boolean getVictoire()
     {
+        return true;
+    }
+
+
+    //////// serie evaluation pour le jeu mieux diviser pour meilleur comprehension du minmax
+    /// apprisrecemment, possibiliter java de retourner un bool avec juste des verif,
+    /// 
+    public boolean verifierVictoire(Mark mark)
+    {
+        return
+        // verification victoire  ligne horizontale  ( y ) OU vertical OU diagonal
+        (board[0][0] == mark && board[0][1] == mark && board[0][2] == mark) ||
+        (board[1][0] == mark && board[1][1] == mark && board[1][2] == mark) ||
+        (board[2][0] == mark && board[2][1] == mark && board[2][2] == mark) ||
+
+
+        // colonne vertical ( x) 
+        (board[0][0] == mark && board[1][0] == mark && board[2][0] == mark) ||
+        (board[0][1] == mark && board[1][1] == mark && board[2][1] == mark) ||
+        (board[0][2] == mark && board[1][2] == mark && board[2][2] == mark) ||
+
+
+        // Diagonals
+        (board[0][0] == mark && board[1][1] == mark && board[2][2] == mark) ||
+        (board[0][2] == mark && board[1][1] == mark && board[2][0] == mark);
+    }
+
+    //verifie sitableaua une case vide, si non, alors partie null
+    public boolean partieNullCheck()
+    {
+        // retourner si la partie nest pas null
+        for(int colonne = 0 ; colonne < boardSize ; colonne ++)
+        {
+            for(int ligne = 0 ;ligne < boardSize ; ligne ++)
+            {
+                if(board[colonne][ligne] == Mark.EMPTY)
+                {
+                    return false;
+                }
+            }
+        }
         return true;
     }
 }
