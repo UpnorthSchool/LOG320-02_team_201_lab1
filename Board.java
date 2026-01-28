@@ -143,6 +143,23 @@ class Board
         
     }
 
+    //listes des cae disponbiles sur le board 
+    public ArrayList<Move> getAvailableCase()
+    {
+        ArrayList<Move> moveAvailableNow = new ArrayList<>();
+        for(int xCol = 0 ; xCol < getBoardSize() ; xCol++)
+        {
+            for(int yLig = 0; yLig < getBoardSize() ; yLig++)
+            {
+                if( getBoard()[xCol][yLig] == Mark.EMPTY)
+                {
+                    moveAvailableNow.add(new Move(xCol,yLig));
+                }
+            }
+        }
+        return moveAvailableNow;
+    }
+
     public int getBoardSize()
     {
         return boardSize;

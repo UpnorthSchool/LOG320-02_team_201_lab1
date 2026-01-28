@@ -63,7 +63,7 @@ public class Test {
                 break;
               }
               //TODO testing here to see available ai move, seems to be working 
-              ArrayList<Move> aiPossibleNextMove= aiMachine.getAvailableCase(board);
+              ArrayList<Move> aiPossibleNextMove= aiMachine.getMovePossibleUncheck();
               aiPossibleNextMove.forEach( (movePossible) -> { System.out.println(movePossible.toString());});
 
 

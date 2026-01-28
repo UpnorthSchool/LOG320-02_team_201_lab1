@@ -13,6 +13,7 @@ class CPUPlayer
     // au début de votre MinMax ou Alpha Beta.
     private int numExploredNodes;
     private Mark cpuMARK;
+    private ArrayList<Move> movePossibleUncheck = new ArrayList<>();
 
     // Le constructeur reçoit en paramètre le
     // joueur MAX (X ou O)
@@ -54,21 +55,18 @@ class CPUPlayer
         return new ArrayList<>();
     }
 
-    public ArrayList<Move> getAvailableCase(Board board)
+    public void setMovePossibleUncheck(Board board)
     {
-        ArrayList<Move> moveAvailableNow = new ArrayList<>();
-        for(int xCol = 0 ; xCol < board.getBoardSize() ; xCol++)
-        {
-            for(int yLig = 0; yLig < board.getBoardSize() ; yLig++)
-            {
-                if( board.getBoard()[xCol][yLig] == Mark.EMPTY)
-                {
-                    moveAvailableNow.add(new Move(xCol,yLig));
-                }
-            }
-        }
-        return moveAvailableNow;
-    } 
+        movePossibleUncheck = board.getAvailableCase();
+    }
+
+    public ArrayList<Move> getMovePossibleUncheck()
+    {
+        return movePossibleUncheck;
+    }
+
+
+
 
 
 
