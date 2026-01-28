@@ -63,11 +63,14 @@ class Board
         
     }
 
+    //display du board avec un string builder. 
+    //ajustement des lignes colonne pour etre egal 
     public void display(){
         StringBuilder boardShowString = new StringBuilder();
         for(int yLig = boardSize - 1 ; yLig >= 0; yLig--){
             for(int xCol = 0; xCol < boardSize ; xCol++){
-                boardShowString.append(board[xCol][yLig] + "  ");
+                String ajustement = (board[xCol][yLig] == Mark.EMPTY) ? "  " + board[xCol][yLig].toString() : "   " + board[xCol][yLig].toString();
+                boardShowString.append(String.format("%-" + 7 + "s", ajustement));
             }
             boardShowString.append("\n");
         }
@@ -120,4 +123,19 @@ class Board
         }
         return true;
     }
+
+
+    //verification que le mouvement est sur le board 
+    public boolean moveValide(int xColPosition, int yLignePosition)
+    {
+        //check on board and check if case empty
+        if(xColPosition > -1 && xColPosition < boardSize && yLignePosition > -1 && yLignePosition < boardSize && board[xColPosition][yLignePosition] == Mark.EMPTY)
+        {
+            return true;
+        }
+        
+        return false;
+        
+    }
+
 }

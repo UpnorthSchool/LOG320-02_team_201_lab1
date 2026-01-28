@@ -9,7 +9,8 @@ public class Test {
       Scanner myObj = new Scanner(System.in);
       CPUPlayer aiMachine;
       Move newMoveHuman = new Move();
-
+      //tant que min value game is ongoing;
+      int scoreKeeper = Integer.MIN_VALUE;
 
 
 
@@ -21,7 +22,7 @@ public class Test {
           choix = myObj.nextLine().toLowerCase();  // lecture du texte tapé par le joueur
           aiMachine = choix.equals("x") ? new CPUPlayer(Mark.O) : new CPUPlayer(Mark.X);
           playerChoice = true;
-          System.out.println("une entrée invalide vous redemandera d'entrer une location");
+          System.out.println("UNE ENTRÉE INVALIDE VOUS REDEMANDERA D'ENTRER UNE LOCATION");
 
       }
       
@@ -32,18 +33,22 @@ public class Test {
           boolean moveValide = false;
           while(!moveValide)
           {
+
               System.out.println("choisir colonne et ligne.Exemple: A1 ou C3");
               String moveChoisi = myObj.nextLine().toLowerCase();
 
               newMoveHuman.setCol(decoderEntrer.decodeCol(moveChoisi));
               newMoveHuman.setRow(decoderEntrer.decodeLigne(moveChoisi));
-              if(newMoveHuman.getCol() != -1 && newMoveHuman.getRow() != -1)
-              {
+              
+              //verification que le move est valide
+              if(board.moveValide(newMoveHuman.getCol(), newMoveHuman.getRow())){
                 moveValide = true;
+              }else
+              {
+                System.out.println("case deja prise, rejoue");
+                moveValide = false;
               }
               
-              //TODO verifier mouvement valide ici avant de jouer : case bien dans tableau + case non prise
-              //System.out.println("case deja prise, rejoue");
 
           }
           if(choix.equals("x") )
@@ -51,23 +56,50 @@ public class Test {
               board.play(newMoveHuman, Mark.X);
               board.display();
               //TODO check que victoire ou defaite
-              if(board.evaluate(Mark.X) == 100)
+              scoreKeeper = board.evaluate(Mark.X);
+              if(scoreKeeper != Integer.MIN_VALUE)
               {
-                System.out.println("Une victoire des X ");
-                System.out.println("partie terminer");
-                break;  
+                if(scoreKeeper == 100)
+                {
+                  System.out.println("!! Victoire des X !! ");
+                  System.out.println("PARTIE TERMINER");
+                  break;  
+                }else if (scoreKeeper == -100)
+                {
+                  System.out.println("!! VICTOIRE de L'AI !!");
+                  System.out.println("PARTIE TERMINER");
+                  break;
+                }else if (scoreKeeper == 0)
+                {
+                  System.out.println("!! PARTIE NULL !!");
+                  break;
+                }
               }
+              
 
           }
           else
           {
               board.play(newMoveHuman, Mark.O);
               board.display();
-              if(board.evaluate(Mark.O) == 100)
+              scoreKeeper = board.evaluate(Mark.O);
+              if(scoreKeeper != Integer.MIN_VALUE)
               {
-                System.out.println("Une victoire des O ");
-                System.out.println("partie terminer");
-                break;  
+                if(scoreKeeper == 100)
+                {
+                  System.out.println("!! Victoire des O !! ");
+                  System.out.println("PARTIE TERMINER");
+                  break;  
+                }else if (scoreKeeper == -100)
+                {
+                  System.out.println("!! VICTOIRE de L'AI !!");
+                  System.out.println("PARTIE TERMINER");
+                  break;
+                }else if (scoreKeeper == 0)
+                {
+                  System.out.println("!! PARTIE NULL !!");
+                  break;
+                }
               }
 
           }
