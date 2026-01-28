@@ -46,7 +46,7 @@ public class Test {
                 moveValide = true;
               }else
               {
-                System.out.println("case deja prise, rejoue");
+                System.out.println("Case Invalide !! ");
                 moveValide = false;
               }
               
@@ -56,6 +56,7 @@ public class Test {
           {
               board.play(newMoveHuman, Mark.X);
               board.display();
+              scoreKeeper = board.evaluate(Mark.X);
 
               //check que victoire ou defaites
               if(board.hasWon(scoreKeeper))
