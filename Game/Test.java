@@ -37,6 +37,9 @@ public class Test {
           while(!moveValide)
           {
 
+              board.display();
+
+              //TODO faire que les x jour en premier toujours
               System.out.println("choisir colonne et ligne.Exemple: A1 ou C3");
               String moveChoisi = myObj.nextLine().toLowerCase();
 
@@ -57,7 +60,6 @@ public class Test {
           if(choix.equals("x") )
           {
               board.play(newMoveHuman, Mark.X);
-              board.display();
               scoreKeeper = board.evaluate(Mark.X);
 
               //check que victoire ou defaites
@@ -68,6 +70,9 @@ public class Test {
               //TODO testing here to see available ai move, seems to be working 
               ArrayList<Move> aiPossibleNextMove= aiMachine.getMovePossibleUncheck(board);
               aiPossibleNextMove.forEach( (movePossible) -> { System.out.print(movePossible.toString() +" ; ");});
+              System.out.println(
+
+              );
 
 
               
@@ -75,16 +80,18 @@ public class Test {
           }
           else
           {
+              //TODO testing here to see available ai move, seems to be working, 
+              //TODO AI play first herex
+              ArrayList<Move> aiPossibleNextMove= aiMachine.getMovePossibleUncheck(board);
+              aiPossibleNextMove.forEach( (movePossible) -> { System.out.print(movePossible.toString() +" ; ");});
+              System.out.println();
               board.play(newMoveHuman, Mark.O);
-              board.display();
               scoreKeeper = board.evaluate(Mark.O);
               if(board.hasWon(scoreKeeper))
               {
                 break;
               }
-              //TODO testing here to see available ai move, seems to be working 
-              ArrayList<Move> aiPossibleNextMove= aiMachine.getMovePossibleUncheck(board);
-              aiPossibleNextMove.forEach( (movePossible) -> { System.out.print(movePossible.toString() +" ; ");});
+
           }
         }
         

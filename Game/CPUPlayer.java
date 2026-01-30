@@ -1,6 +1,8 @@
 package Game;
 import java.util.ArrayList;
 
+import Game.Algorythme.MinMax;
+
 // IMPORTANT: Il ne faut pas changer la signature des méthodes
 // de cette classe, ni le nom de la classe.
 // Vous pouvez par contre ajouter d'autres méthodes (ça devrait 
@@ -16,12 +18,13 @@ public class CPUPlayer
     private Mark cpuMARK;
     private Mark opponentMARK;
     private ArrayList<Move> movePossibleUncheck = new ArrayList<>();
+    public MinMax miniMax = new MinMax();
 
     // Le constructeur reçoit en paramètre le
     // joueur MAX (X ou O)
     public CPUPlayer(Mark cpu){
         setCpuMark(cpu);
-        setCpuMark((cpu == Mark.X) ? Mark.O : Mark.X);
+        setOpponentMark((cpu == Mark.X) ? Mark.O : Mark.X);
     }
 
     // Ne pas changer cette méthode
@@ -36,16 +39,19 @@ public class CPUPlayer
     {
         numExploredNodes = 0;
 
-        //TODO modifier ceici puisque ajout de fonctionpour cheker case vide a ete fait
-        ArrayList<Move> nextMoves = new ArrayList<>();
-        for(int r = 0; r < 3; r++){
-            for(int c = 0; c < 3; c++){
-                if (board.getBoard()[r][c] == Mark.EMPTY){
-                    nextMoves.add(new Move(r, c));
-                }
-            }
+        for(Move move : getMovePossibleUncheck(board))
+        {
+            //simule les moves un a un
+            board.play(move, cpuMARK);
+            //simule le coup adverse(commence par min)
+            int score = miniMax.minMax(board, getOpponentMark());
+            //enleve le move fait et en essai un autre
+            board.undoMove(move);
         }
-        return nextMoves;
+
+
+        //changer ce que sa retourne
+        return getMovePossibleUncheck(board);
     }
 
     // Retourne la liste des coups possibles.  Cette liste contient
@@ -59,6 +65,7 @@ public class CPUPlayer
     }
 
 
+    //check for empty case in board 
     public ArrayList<Move> getMovePossibleUncheck(Board board)
     {
         movePossibleUncheck = board.getAvailableCase();
