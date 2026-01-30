@@ -1,6 +1,7 @@
 package Game;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.concurrent.ThreadLocalRandom;
 
 import Game.Decoder.stringToInt;
 
@@ -68,11 +69,12 @@ public class Test {
                 break;
               }
               //TODO testing here to see available ai move, seems to be working 
-              ArrayList<Move> aiPossibleNextMove= aiMachine.getMovePossibleUncheck(board);
+              ArrayList<Move> aiPossibleNextMove= aiMachine.getNextMoveMinMax(board);
               aiPossibleNextMove.forEach( (movePossible) -> { System.out.print(movePossible.toString() +" ; ");});
-              System.out.println(
-
-              );
+              System.out.println(aiMachine.getNumOfExploredNodes());
+              //joue un move random de la liste 
+              //int random = ThreadLocalRandom.current().nextInt(0, aiPossibleNextMove.size());
+              board.play(aiPossibleNextMove.get(0), aiMachine.getCpuMark());
 
 
               

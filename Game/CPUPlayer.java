@@ -18,13 +18,14 @@ public class CPUPlayer
     private Mark cpuMARK;
     private Mark opponentMARK;
     private ArrayList<Move> movePossibleUncheck = new ArrayList<>();
-    public MinMax miniMax = new MinMax();
+    public MinMax miniMax;
 
     // Le constructeur reçoit en paramètre le
     // joueur MAX (X ou O)
     public CPUPlayer(Mark cpu){
         setCpuMark(cpu);
         setOpponentMark((cpu == Mark.X) ? Mark.O : Mark.X);
+        miniMax = new MinMax(cpu);
     }
 
     // Ne pas changer cette méthode
@@ -35,25 +36,33 @@ public class CPUPlayer
     // Retourne la liste des coups possibles.  Cette liste contient
     // plusieurs coups possibles si et seuleument si plusieurs coups
     // ont le même score.
-    public ArrayList<Move> getNextMoveMinMax(Board board)
+public ArrayList<Move> getNextMoveMinMax(Board board)
+{
+    numExploredNodes = 0;
+    int bestScore = Integer.MIN_VALUE;
+    ArrayList<Move> bestMoves = new ArrayList<>(); // Changed from single Move
+
+    for(Move move : getMovePossibleUncheck(board))
     {
-        numExploredNodes = 0;
-
-        for(Move move : getMovePossibleUncheck(board))
-        {
-            //simule les moves un a un
-            board.play(move, cpuMARK);
-            //simule le coup adverse(commence par min)
-            int score = miniMax.minMax(board, getOpponentMark());
-            //enleve le move fait et en essai un autre
-            board.undoMove(move);
+        board.play(move, cpuMARK);
+        int score = miniMax.minMax(board, getOpponentMark(), this);
+        board.undoMove(move);
+        
+        if(score > bestScore) {
+            // trouver un meilleur move alors noter 
+            bestScore = score;
+            bestMoves.clear();
+            bestMoves.add(move);
+        } 
+        else if(score == bestScore) {
+            // trouver un move egal, ajouter 
+            bestMoves.add(move);
         }
-
-
-        //changer ce que sa retourne
-        return getMovePossibleUncheck(board);
+        // si pas de meilleur move,prendre le seul bon move"
     }
 
+    return bestMoves;
+}
     // Retourne la liste des coups possibles.  Cette liste contient
     // plusieurs coups possibles si et seuleument si plusieurs coups
     // ont le même score.
@@ -99,5 +108,10 @@ public class CPUPlayer
     public Mark getOpponentMark()
     {
         return opponentMARK;
+    }
+
+    public void incrementNodeCounter()
+    {
+        this.numExploredNodes++;
     }
 }
