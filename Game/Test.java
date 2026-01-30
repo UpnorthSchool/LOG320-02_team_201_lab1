@@ -31,6 +31,10 @@ public class Test {
       }
       
       board = new Board();
+      if(aiMachine.getCpuMark() == Mark.X)
+      {
+        cpuMovePlay(board, aiMachine);
+      }
 
       while(board.getVictoire())
       {
@@ -68,13 +72,7 @@ public class Test {
               {
                 break;
               }
-              //TODO testing here to see available ai move, seems to be working 
-              ArrayList<Move> aiPossibleNextMove= aiMachine.getNextMoveMinMax(board);
-              aiPossibleNextMove.forEach( (movePossible) -> { System.out.print(movePossible.toString() +" ; ");});
-              System.out.println(aiMachine.getNumOfExploredNodes());
-              //joue un move random de la liste 
-              //int random = ThreadLocalRandom.current().nextInt(0, aiPossibleNextMove.size());
-              board.play(aiPossibleNextMove.get(0), aiMachine.getCpuMark());
+              cpuMovePlay(board, aiMachine);
 
 
               
@@ -83,19 +81,30 @@ public class Test {
           else
           {
               //TODO testing here to see available ai move, seems to be working, 
-              //TODO AI play first herex
-              ArrayList<Move> aiPossibleNextMove= aiMachine.getMovePossibleUncheck(board);
-              aiPossibleNextMove.forEach( (movePossible) -> { System.out.print(movePossible.toString() +" ; ");});
-              System.out.println();
               board.play(newMoveHuman, Mark.O);
               scoreKeeper = board.evaluate(Mark.O);
               if(board.hasWon(scoreKeeper))
               {
                 break;
+              }else
+              {
+                cpuMovePlay(board, aiMachine);
               }
 
           }
         }
         
    }
+   public static void cpuMovePlay(Board board, CPUPlayer aiMachine)
+   {
+    ArrayList<Move> aiPossibleNextMove= aiMachine.getNextMoveMinMax(board);
+    aiPossibleNextMove.forEach( (movePossible) -> { System.out.print(movePossible.toString() +" ; ");});
+    System.out.println(aiMachine.getNumOfExploredNodes());
+    //joue un move random de la liste 
+    int random = ThreadLocalRandom.current().nextInt(0, aiPossibleNextMove.size());
+    board.play(aiPossibleNextMove.get(random), aiMachine.getCpuMark());
+   }
+
+
+   
 }
