@@ -9,7 +9,7 @@ public class Test {
    public static void main(String []args) {
       stringToInt decoderEntrer = new stringToInt();
       Board board = new Board();
-      System.out.println("Svp entrer les cases que vous voulez jouer comme suit (ligne, colonne, exemple : A1,b2,c3)");
+      System.out.println("Svp entrer les cases que vous voulez jouer comme suit (x,y), exemple : A1,b2,c3)");
       Scanner myObj = new Scanner(System.in);
       CPUPlayer aiMachine = new CPUPlayer(null);
       Move newMoveHuman = new Move();
@@ -27,6 +27,8 @@ public class Test {
           aiMachine = choix.equals("x") ? new CPUPlayer(Mark.O) : new CPUPlayer(Mark.X);
           playerChoice = true;
           System.out.println("UNE ENTRÉE INVALIDE VOUS REDEMANDERA D'ENTRER UNE LOCATION");
+          board.display();
+
 
       }
       
@@ -34,6 +36,7 @@ public class Test {
       if(aiMachine.getCpuMark() == Mark.X)
       {
         cpuMovePlay(board, aiMachine);
+        board.display();
       }
 
       while(board.getVictoire())
@@ -41,8 +44,6 @@ public class Test {
           boolean moveValide = false;
           while(!moveValide)
           {
-
-              board.display();
 
               //TODO faire que les x jour en premier toujours
               System.out.println("choisir colonne et ligne.Exemple: A1 ou C3");
@@ -65,17 +66,20 @@ public class Test {
           if(choix.equals("x") )
           {
               board.play(newMoveHuman, Mark.X);
-              scoreKeeper = board.evaluate(Mark.X);
 
               //check que victoire ou defaites
+              scoreKeeper = board.evaluate(Mark.X);
               if(board.hasWon(scoreKeeper))
               {
                 break;
+              }else
+              {              
+                cpuMovePlay(board, aiMachine);
+                board.display();
+                if (board.hasWon(board.evaluate(Mark.X))) break;
               }
-              cpuMovePlay(board, aiMachine);
 
 
-              
 
           }
           else
@@ -89,6 +93,8 @@ public class Test {
               }else
               {
                 cpuMovePlay(board, aiMachine);
+                board.display();
+                if (board.hasWon(board.evaluate(Mark.O))) break;
               }
 
           }
@@ -98,6 +104,7 @@ public class Test {
    public static void cpuMovePlay(Board board, CPUPlayer aiMachine)
    {
     ArrayList<Move> aiPossibleNextMove= aiMachine.getNextMoveMinMax(board);
+    //test display pour les moves possible qui ont le meme score 
     aiPossibleNextMove.forEach( (movePossible) -> { System.out.print(movePossible.toString() +" ; ");});
     System.out.println(aiMachine.getNumOfExploredNodes());
     //joue un move random de la liste 
