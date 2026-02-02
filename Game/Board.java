@@ -91,8 +91,8 @@ public class Board
 
 
     //////// serie evaluation pour le jeu mieux diviser pour meilleur comprehension du minmax
-    /// apprisrecemment, possibiliter java de retourner un bool avec juste des verif,
-    /// 
+    /// appri srecemment, possibiliter java de retourner un bool avec juste des verif,
+    /// division des evaluations sur plusieurs ligne vue sur stack overflow
     public boolean verifierVictoire(Mark mark)
     {
         return
@@ -113,7 +113,7 @@ public class Board
         (board[0][2] == mark && board[1][1] == mark && board[2][0] == mark);
     }
 
-    //verifie sitableaua une case vide, si non, alors partie null
+    //verifie si tableaua une case vide, si non, alors partie null
     public boolean partieNullCheck()
     {
         // retourner si la partie nest pas null
@@ -144,7 +144,7 @@ public class Board
         
     }
 
-    //listes des cae disponbiles sur le board 
+    //listes des cae disponbiles sur le board,comme demander dans l'enoncé
     public ArrayList<Move> getAvailableCase()
     {
         ArrayList<Move> moveAvailableNow = new ArrayList<>();

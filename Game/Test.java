@@ -27,7 +27,6 @@ public class Test {
           aiMachine = choix.equals("x") ? new CPUPlayer(Mark.O) : new CPUPlayer(Mark.X);
           playerChoice = true;
           System.out.println("UNE ENTRÉE INVALIDE VOUS REDEMANDERA D'ENTRER UNE LOCATION");
-          board.display();
 
 
       }
@@ -36,7 +35,6 @@ public class Test {
       if(aiMachine.getCpuMark() == Mark.X)
       {
         cpuMovePlay(board, aiMachine);
-        board.display();
       }
 
       while(board.getVictoire())
@@ -45,7 +43,7 @@ public class Test {
           while(!moveValide)
           {
 
-              //TODO faire que les x jour en premier toujours
+              board.display();
               System.out.println("choisir colonne et ligne.Exemple: A1 ou C3");
               String moveChoisi = myObj.nextLine().toLowerCase();
 
@@ -75,7 +73,6 @@ public class Test {
               }else
               {              
                 cpuMovePlay(board, aiMachine);
-                board.display();
                 if (board.hasWon(board.evaluate(Mark.X))) break;
               }
 
@@ -93,12 +90,13 @@ public class Test {
               }else
               {
                 cpuMovePlay(board, aiMachine);
-                board.display();
                 if (board.hasWon(board.evaluate(Mark.O))) break;
               }
 
           }
         }
+
+        board.display();
         
    }
    public static void cpuMovePlay(Board board, CPUPlayer aiMachine)
