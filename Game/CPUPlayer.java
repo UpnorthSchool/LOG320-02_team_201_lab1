@@ -1,6 +1,7 @@
 package Game;
 import java.util.ArrayList;
 
+import Game.Algorythme.AlphaBeta;
 import Game.Algorythme.MinMax;
 
 // IMPORTANT: Il ne faut pas changer la signature des méthodes
@@ -18,14 +19,14 @@ public class CPUPlayer
     private Mark cpuMARK;
     private Mark opponentMARK;
     private ArrayList<Move> movePossibleUncheck = new ArrayList<>();
-    public MinMax miniMax;
+    public AlphaBeta miniMax;
 
     // Le constructeur reçoit en paramètre le
     // joueur MAX (X ou O)
     public CPUPlayer(Mark cpu){
         setCpuMark(cpu);
         setOpponentMark((cpu == Mark.X) ? Mark.O : Mark.X);
-        miniMax = new MinMax(cpu);
+        miniMax = new AlphaBeta(cpu);
     }
 
     // Ne pas changer cette méthode
@@ -45,7 +46,7 @@ public ArrayList<Move> getNextMoveMinMax(Board board)
     for(Move move : getMovePossibleUncheck(board))
     {
         board.play(move, cpuMARK);
-        int score = miniMax.minMax(board, getOpponentMark(), this);
+        int score = miniMax.alphaBeta(board, getOpponentMark(), this, Integer.MIN_VALUE, Integer.MAX_VALUE);
         board.undoMove(move);
         
         if(score > bestScore) {
