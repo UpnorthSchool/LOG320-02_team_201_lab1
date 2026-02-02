@@ -6,7 +6,11 @@ import java.util.concurrent.ThreadLocalRandom;
 import Game.Decoder.stringToInt;
 
 public class Test {
-   public static void main(String []args) {
+
+
+
+  
+  public static void main(String []args) {
       stringToInt decoderEntrer = new stringToInt();
       Board board = new Board();
       System.out.println("Svp entrer les cases que vous voulez jouer comme suit (x,y), exemple : A1,b2,c3)");
@@ -44,6 +48,8 @@ public class Test {
           {
 
               board.display();
+              System.out.println();
+              System.out.println();
               System.out.println("choisir colonne et ligne.Exemple: A1 ou C3");
               String moveChoisi = myObj.nextLine().toLowerCase();
 
@@ -102,9 +108,10 @@ public class Test {
    public static void cpuMovePlay(Board board, CPUPlayer aiMachine)
    {
     ArrayList<Move> aiPossibleNextMove= aiMachine.getNextMoveMinMax(board);
-    //test display pour les moves possible qui ont le meme score 
+    System.out.println("Move ayant meme score : ");
     aiPossibleNextMove.forEach( (movePossible) -> { System.out.print(movePossible.toString() +" ; ");});
-    System.out.println(aiMachine.getNumOfExploredNodes());
+    System.out.println();
+    System.out.println("Nombre de node explorer : " + aiMachine.getNumOfExploredNodes());
     //joue un move random de la liste 
     int random = ThreadLocalRandom.current().nextInt(0, aiPossibleNextMove.size());
     board.play(aiPossibleNextMove.get(random), aiMachine.getCpuMark());

@@ -11,6 +11,15 @@ public class Board
     private Mark[][] board;
     private int boardSize = 3;
 
+    //ajout de couleur, pour le plaisir du display.
+    // Source - https://stackoverflow.com/a/5762502
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_GREEN = "\u001B[32m";
+    public static final String ANSI_YELLOW = "\u001B[33m";
+
+
+
     // Ne pas changer la signature de cette méthode
     public Board() {
         board = new Mark[boardSize][boardSize];
@@ -175,18 +184,28 @@ public class Board
             {
             if(scoreKeeper == 100)
             {
-                System.out.println("!! Victoire du Joueur !! ");
+                System.out.println(ANSI_GREEN + "!! Victoire du Joueur !! " + ANSI_RESET);
                 System.out.println("PARTIE TERMINER");
+                System.out.println();
+                System.out.println();
+                
                 return true;
             }else if (scoreKeeper == -100)
             {
-                System.out.println("!! VICTOIRE de L'AI !!");
+                System.out.println(ANSI_RED + "!! VICTOIRE de L'AI !!" + ANSI_RESET);
                 System.out.println("PARTIE TERMINER");
+                System.out.println();
+                System.out.println();
+
                 return true;
 
             }else if (scoreKeeper == 0)
             {
-                System.out.println("!! PARTIE NULL !!");
+                System.out.println(ANSI_YELLOW + "!! PARTIE NULL !!" + ANSI_RESET);
+                System.out.println("PARTIE TERMINER");
+                System.out.println();
+                System.out.println();
+                
                 return true;
             }
             }
