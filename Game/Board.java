@@ -184,16 +184,16 @@ public class Board
             {
             if(scoreKeeper == 100)
             {
-                System.out.println(ANSI_GREEN + "!! Victoire du Joueur !! " + ANSI_RESET);
-                System.out.println("PARTIE TERMINER");
+                System.out.println(ANSI_GREEN + "!! Victoire du Joueur !! ");
+                System.out.println("PARTIE TERMINER"  + ANSI_RESET);
                 System.out.println();
                 System.out.println();
                 
                 return true;
             }else if (scoreKeeper == -100)
             {
-                System.out.println(ANSI_RED + "!! VICTOIRE de L'AI !!" + ANSI_RESET);
-                System.out.println("PARTIE TERMINER");
+                System.out.println(ANSI_RED + "!! VICTOIRE de L'AI !!" );
+                System.out.println("PARTIE TERMINER" + ANSI_RESET);
                 System.out.println();
                 System.out.println();
 
@@ -201,8 +201,8 @@ public class Board
 
             }else if (scoreKeeper == 0)
             {
-                System.out.println(ANSI_YELLOW + "!! PARTIE NULL !!" + ANSI_RESET);
-                System.out.println("PARTIE TERMINER");
+                System.out.println(ANSI_YELLOW + "!! PARTIE NULL !!");
+                System.out.println("PARTIE TERMINER"  + ANSI_RESET);
                 System.out.println();
                 System.out.println();
                 
