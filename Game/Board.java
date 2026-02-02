@@ -75,12 +75,13 @@ public class Board
         StringBuilder boardShowString = new StringBuilder();
         for(int yLig = boardSize - 1 ; yLig >= 0; yLig--){
             for(int xCol = 0; xCol < boardSize ; xCol++){
-                String ajustement = (board[xCol][yLig] == Mark.EMPTY) ? "  " + board[xCol][yLig].toString() : "   " + board[xCol][yLig].toString();
-                boardShowString.append(String.format("%-" + 7 + "s", ajustement));
+                String ajustement = (board[xCol][yLig] == Mark.EMPTY) ? "  " + board[xCol][yLig].toString() : "    " + board[xCol][yLig].toString();
+                boardShowString.append(String.format("%-" + 8 + "s", ajustement));
             }
-            boardShowString.append("\n");
+            boardShowString.append(" "+ (yLig + 1) + "\n");
         }
-        System.out.println(boardShowString.toString());
+        System.out.print(boardShowString.toString());
+        System.out.println("    " +"A       B       C" );
     }
 
 
